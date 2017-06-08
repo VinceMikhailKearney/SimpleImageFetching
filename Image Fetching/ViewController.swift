@@ -8,6 +8,9 @@
 
 import UIKit
 
+let httpsImageUrl = "https://s-media-cache-ak0.pinimg.com/736x/5d/93/69/5d9369d9344d8b27b42ed8ae72ff2669.jpg"
+let httpImageUrl = "http://www.puppiesden.com/pics/1/poodle-puppy2.jpg"
+
 class ViewController: UIViewController
 {
     // MARK: Properties
@@ -16,8 +19,10 @@ class ViewController: UIViewController
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        let imageUrl = URL(string: "https://s-media-cache-ak0.pinimg.com/736x/b7/ef/bc/b7efbcd8320cb753978d6c2d551785aa.jpg")
         
+        self.imageView.contentMode = .scaleAspectFit
+     
+        let imageUrl = URL(string: httpImageUrl)
         let task = URLSession.shared.dataTask(with: imageUrl!)
         { (data, response, error) in
             if error == nil {
@@ -28,7 +33,6 @@ class ViewController: UIViewController
                 }
             }
         }
-        
         task.resume()
     }
 }
