@@ -46,7 +46,7 @@ class ViewController: UIViewController
     @IBAction private func chooseImageDownloadType(_ sender: Any?)
     {
         print("Tapped the button")
-        let alert = UIAlertController(title: "Change url type", message: "Which image type would you like to download?", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Change URL Type", message: "Which image type would you like to download?", preferredStyle: .alert)
         let httpAction = UIAlertAction(title: "HTTP", style: .default) { action in
             self.imageToDownload = httpImageUrl
             self.downloadImage()
