@@ -8,18 +8,27 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
-    override func viewDidLoad() {
+class ViewController: UIViewController
+{
+    // MARK: Properties
+    @IBOutlet weak var imageView : UIImageView!
+    
+    override func viewDidLoad()
+    {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        let imageUrl = URL(string: "https://s-media-cache-ak0.pinimg.com/736x/b7/ef/bc/b7efbcd8320cb753978d6c2d551785aa.jpg")
+        
+        let task = URLSession.shared.dataTask(with: imageUrl!)
+        { (data, response, error) in
+            if error == nil {
+                print("Downloading image finished")
+                let downloadImage = UIImage(data: data!)
+                DispatchQueue.main.async {
+                    self.imageView.image = downloadImage
+                }
+            }
+        }
+        
+        task.resume()
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-
 }
-
