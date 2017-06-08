@@ -28,7 +28,6 @@ class ViewController: UIViewController, UITextFieldDelegate
         super.viewDidLoad()
         self.imageView.contentMode = .scaleAspectFit
         self.downloadButton.layer.cornerRadius = 5
-        self.downloadImage()
         self.view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hideKeyboard)))
         self.urlTextField.delegate = self
     }
@@ -45,13 +44,13 @@ class ViewController: UIViewController, UITextFieldDelegate
         let imageUrl = URL(string: (self.urlTextField.text?.characters.count)! > 0 ? self.urlTextField.text! : gokuSSJ4)
         let task = URLSession.shared.dataTask(with: imageUrl!)
         { (data, response, error) in
-            if error == nil {
-                print("Downloading image finished")
-                let downloadImage = UIImage(data: data!)
-                DispatchQueue.main.async {
-                    self.imageView.image = downloadImage
-                }
-            }
+            
+            guard (response as? HTTPURLResponse)?.statusCode == 200 else { self.showHud(withText: "Failed to download image"); return }
+            
+            print("Downloading image finished")
+            let downloadImage = UIImage(data: data!)
+            DispatchQueue.main.async { self.imageView.image = downloadImage }
+            self.showHud(withText: "Image downloaded")
         }
         task.resume()
     }
@@ -70,5 +69,20 @@ class ViewController: UIViewController, UITextFieldDelegate
     // MARK: Helpers
     func hideKeyboard() {
         self.urlTextField.resignFirstResponder()
+    }
+    
+    func showHud(withText text : String)
+    {
+        DispatchQueue.main.sync
+        {
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
+            hud.mode = .text
+            hud.offset = CGPoint(x: 0,y :10000)
+            hud.label.text = text
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            MBProgressHUD.hide(for: self.view, animated: true)
+        }
     }
 }
