@@ -13,24 +13,36 @@ enum URL_TYPE {
     case HTTPS
 }
 
-let httpsImageUrl = "https://s-media-cache-ak0.pinimg.com/736x/5d/93/69/5d9369d9344d8b27b42ed8ae72ff2669.jpg"
+let gokuSSJ4 = "https://s-media-cache-ak0.pinimg.com/736x/4a/64/73/4a647319672cc080e9eb8dac1c73e3ab.jpg"
 let httpImageUrl = "http://www.puppiesden.com/pics/1/poodle-puppy2.jpg"
 
-class ViewController: UIViewController
+class ViewController: UIViewController, UITextFieldDelegate
 {
     // MARK: Properties
     @IBOutlet weak var imageView : UIImageView!
+    @IBOutlet weak var downloadButton : UIButton!
+    @IBOutlet weak var urlTextField : UITextField!
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         self.imageView.contentMode = .scaleAspectFit
-        self.downloadImage(.HTTPS)
+        self.downloadButton.layer.cornerRadius = 5
+        self.downloadImage()
+        self.view.addGestureRecognizer(UITapGestureRecognizer.init(target: self, action: #selector(hideKeyboard)))
+        self.urlTextField.delegate = self
     }
     
-    fileprivate func downloadImage(_ type : URL_TYPE)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.urlTextField.text = "" // Blank out text and download placeholder image
+        self.downloadImage()
+    }
+    
+    func downloadImage()
     {
-        let imageUrl = URL(string: type == .HTTP ? httpImageUrl : httpsImageUrl)
+        self.hideKeyboard()
+        let imageUrl = URL(string: (self.urlTextField.text?.characters.count)! > 0 ? self.urlTextField.text! : gokuSSJ4)
         let task = URLSession.shared.dataTask(with: imageUrl!)
         { (data, response, error) in
             if error == nil {
@@ -44,19 +56,19 @@ class ViewController: UIViewController
         task.resume()
     }
     
-    @IBAction private func chooseImageDownloadType(_ sender: Any?)
-    {
-        print("Tapped the button")
-        let alert = UIAlertController(title: "Change URL Type", message: "Which image type would you like to download?", preferredStyle: .alert)
-        let httpAction = UIAlertAction(title: "HTTP", style: .default) { action in
-            self.downloadImage(.HTTP)
-        }
-        let httpsAction = UIAlertAction(title: "HTTPS", style: .default) { action in
-            self.downloadImage(.HTTPS)
-        }
-        alert.addAction(httpAction)
-        alert.addAction(httpsAction)
-        
-        self.present(alert, animated: true, completion: nil)
+    @IBAction func downloadUrl(_ sender: Any?) {
+        self.downloadImage()
+    }
+    
+    // MARK: UITextFieldDelegate methods
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        print("Pressed return key")
+        self.downloadImage()
+        return false;
+    }
+    
+    // MARK: Helpers
+    func hideKeyboard() {
+        self.urlTextField.resignFirstResponder()
     }
 }

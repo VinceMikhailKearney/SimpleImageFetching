@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,33 +25,47 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aqe-rJ-eCq">
                                 <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFF-wD-CBz">
-                                <rect key="frame" x="90" y="28" width="195" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Paste URL here" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="07Y-sh-heJ">
+                                <rect key="frame" x="16" y="20" width="343" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="GJk-9o-hek"/>
+                                </constraints>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="webSearch" returnKeyType="go"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hNO-Td-sjJ">
+                                <rect key="frame" x="16" y="58" width="96" height="30"/>
                                 <color key="backgroundColor" red="0.0" green="0.69019607839999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="195" id="FXV-aF-oDY"/>
-                                    <constraint firstAttribute="height" constant="30" id="Xk0-Mt-4C2"/>
+                                    <constraint firstAttribute="height" constant="30" id="kln-re-hWf"/>
+                                    <constraint firstAttribute="width" constant="96" id="ra4-RE-WUm"/>
                                 </constraints>
-                                <state key="normal" title="Choose HTTP or HTTPS">
-                                    <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Download">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="chooseImageDownloadType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zY0-nk-44A"/>
+                                    <action selector="downloadUrl:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SuJ-eI-Vdu"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="rFF-wD-CBz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="0NJ-Am-NUs"/>
                             <constraint firstItem="aqe-rJ-eCq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="5ik-A7-mRm"/>
+                            <constraint firstItem="07Y-sh-heJ" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="8OG-z1-CRn"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aqe-rJ-eCq" secondAttribute="bottom" id="IS6-of-6cG"/>
+                            <constraint firstItem="hNO-Td-sjJ" firstAttribute="top" secondItem="07Y-sh-heJ" secondAttribute="bottom" constant="8" id="J8a-iY-2bv"/>
+                            <constraint firstItem="hNO-Td-sjJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="NQG-5j-khm"/>
                             <constraint firstAttribute="trailing" secondItem="aqe-rJ-eCq" secondAttribute="trailing" id="TVy-8O-NCQ"/>
-                            <constraint firstItem="rFF-wD-CBz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jWS-2n-KCq"/>
                             <constraint firstItem="aqe-rJ-eCq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qxS-gx-Sin"/>
+                            <constraint firstItem="07Y-sh-heJ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="sx8-6t-p5i"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="07Y-sh-heJ" secondAttribute="trailing" id="wUX-8I-aKH"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="downloadButton" destination="hNO-Td-sjJ" id="Q9l-WX-2Pb"/>
                         <outlet property="imageView" destination="aqe-rJ-eCq" id="hMc-kF-SdT"/>
+                        <outlet property="urlTextField" destination="07Y-sh-heJ" id="VOH-6y-tXk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
