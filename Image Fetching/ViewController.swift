@@ -15,14 +15,21 @@ class ViewController: UIViewController
 {
     // MARK: Properties
     @IBOutlet weak var imageView : UIImageView!
+    fileprivate var imageToDownload : String?
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
+        self.imageToDownload = httpsImageUrl
         self.imageView.contentMode = .scaleAspectFit
-     
-        let imageUrl = URL(string: httpImageUrl)
+        
+        self.downloadImage()
+    }
+    
+    fileprivate func downloadImage()
+    {
+        let imageUrl = URL(string: self.imageToDownload!)
         let task = URLSession.shared.dataTask(with: imageUrl!)
         { (data, response, error) in
             if error == nil {
@@ -34,5 +41,23 @@ class ViewController: UIViewController
             }
         }
         task.resume()
+    }
+    
+    @IBAction private func chooseImageDownloadType(_ sender: Any?)
+    {
+        print("Tapped the button")
+        let alert = UIAlertController(title: "Change url type", message: "Which image type would you like to download?", preferredStyle: .alert)
+        let httpAction = UIAlertAction(title: "HTTP", style: .default) { action in
+            self.imageToDownload = httpImageUrl
+            self.downloadImage()
+        }
+        let httpsAction = UIAlertAction(title: "HTTPS", style: .default) { action in
+            self.imageToDownload = httpsImageUrl
+            self.downloadImage()
+        }
+        alert.addAction(httpAction)
+        alert.addAction(httpsAction)
+        
+        self.present(alert, animated: true, completion: nil)
     }
 }

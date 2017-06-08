@@ -22,14 +22,30 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aqe-rJ-eCq">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="100" width="375" height="567"/>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rFF-wD-CBz">
+                                <rect key="frame" x="90" y="28" width="195" height="30"/>
+                                <color key="backgroundColor" red="0.0" green="0.69019607839999997" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="195" id="FXV-aF-oDY"/>
+                                    <constraint firstAttribute="height" constant="30" id="Xk0-Mt-4C2"/>
+                                </constraints>
+                                <state key="normal" title="Choose HTTP or HTTPS">
+                                    <color key="titleColor" red="1" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="chooseImageDownloadType:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zY0-nk-44A"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="aqe-rJ-eCq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="5ik-A7-mRm"/>
+                            <constraint firstItem="rFF-wD-CBz" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" id="0NJ-Am-NUs"/>
+                            <constraint firstItem="aqe-rJ-eCq" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" constant="100" id="5ik-A7-mRm"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="aqe-rJ-eCq" secondAttribute="bottom" id="IS6-of-6cG"/>
                             <constraint firstAttribute="trailing" secondItem="aqe-rJ-eCq" secondAttribute="trailing" id="TVy-8O-NCQ"/>
+                            <constraint firstItem="rFF-wD-CBz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="jWS-2n-KCq"/>
                             <constraint firstItem="aqe-rJ-eCq" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="qxS-gx-Sin"/>
                         </constraints>
                     </view>
