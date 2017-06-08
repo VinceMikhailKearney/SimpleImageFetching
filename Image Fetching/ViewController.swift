@@ -8,13 +8,7 @@
 
 import UIKit
 
-enum URL_TYPE {
-    case HTTP
-    case HTTPS
-}
-
 let gokuSSJ4 = "https://s-media-cache-ak0.pinimg.com/736x/4a/64/73/4a647319672cc080e9eb8dac1c73e3ab.jpg"
-let httpImageUrl = "http://www.puppiesden.com/pics/1/poodle-puppy2.jpg"
 
 class ViewController: UIViewController, UITextFieldDelegate
 {
